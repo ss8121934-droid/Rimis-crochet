@@ -1,0 +1,228 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --rimis-cream: #fbf7f0;
+    --rimis-ink: #2a2119;
+    --rimis-terracotta: #bc5b2c;
+    --rimis-sage: #77856a;
+    --rimis-honey: #c2892b;
+  }
+
+  * {
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    @apply text-ink font-sans antialiased;
+    font-weight: 400;
+    line-height: 1.7;
+    overflow-x: hidden;
+    /* Layered warm-paper background — replaces flat white with quiet depth. */
+    background-color: #fbf7f0;
+    background-image:
+      radial-gradient(1100px 620px at 10% -10%, rgba(188, 91, 44, 0.1), transparent 62%),
+      radial-gradient(980px 560px at 94% 2%, rgba(119, 133, 106, 0.13), transparent 64%),
+      linear-gradient(180deg, #fbf7f0 0%, #f8f1e5 46%, #f2e7d5 100%);
+    background-repeat: no-repeat;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    @apply font-display text-ink;
+    font-weight: 400;
+    line-height: 1.06;
+    letter-spacing: -0.015em;
+  }
+
+  ::selection {
+    background: rgba(188, 91, 44, 0.24);
+    color: #2a2119;
+  }
+
+  /* Elegant focus ring for accessibility */
+  :focus-visible {
+    outline: 2px solid #bc5b2c;
+    outline-offset: 3px;
+    border-radius: 4px;
+  }
+
+  /* Custom scrollbar (desktop) */
+  @media (pointer: fine) {
+    ::-webkit-scrollbar {
+      width: 10px;
+      height: 10px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #f2e7d5;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #d3bc9e;
+      border-radius: 999px;
+      border: 2px solid #f2e7d5;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: #bc5b2c;
+    }
+  }
+}
+
+@layer components {
+  .container-x {
+    @apply mx-auto w-full max-w-[1240px] px-5 sm:px-8 lg:px-10;
+  }
+
+  .eyebrow {
+    @apply text-[11px] font-medium uppercase tracking-widest2 text-terracotta;
+  }
+
+  .btn {
+    @apply inline-flex items-center justify-center gap-2 rounded-full px-6 py-3 text-sm font-medium tracking-wide transition-all duration-300 ease-smooth disabled:cursor-not-allowed disabled:opacity-50;
+  }
+
+  .btn-primary {
+    @apply btn bg-ink text-cream-50 hover:bg-terracotta hover:shadow-glow active:scale-[0.98];
+  }
+
+  .btn-terracotta {
+    @apply btn bg-terracotta text-cream-50 hover:bg-terracotta-dark hover:shadow-glow active:scale-[0.98];
+  }
+
+  .btn-outline {
+    @apply btn border border-ink/20 bg-transparent text-ink hover:border-ink hover:bg-ink hover:text-cream-50 active:scale-[0.98];
+  }
+
+  .btn-ghost {
+    @apply btn bg-transparent text-ink hover:bg-ink/5;
+  }
+
+  .input {
+    @apply w-full rounded-2xl border border-clay-200 bg-cream-50 px-4 py-3 text-sm text-ink placeholder:text-ink-faint transition-colors duration-200 focus:border-terracotta focus:outline-none focus:ring-0;
+  }
+
+  .field-label {
+    @apply mb-1.5 block text-xs font-medium uppercase tracking-wider text-ink-soft;
+  }
+
+  .hairline {
+    @apply border-t border-ink/10;
+  }
+
+  .card-surface {
+    @apply rounded-3xl border border-clay-200/70 bg-cream-50/80 shadow-soft backdrop-blur-sm;
+  }
+
+  /* Warm translucent panel — used for floating/overlay surfaces. */
+  .glass-panel {
+    @apply rounded-3xl border border-cream-100/70 bg-cream-50/75 shadow-soft backdrop-blur-md;
+  }
+
+  /* Hand-stitched dashed hairline, a nod to needlework. */
+  .stitch-line {
+    background-image: repeating-linear-gradient(
+      to right,
+      currentColor 0,
+      currentColor 7px,
+      transparent 7px,
+      transparent 14px
+    );
+  }
+
+  /* Animated warm underline for inline links. */
+  .link-underline {
+    background-image: linear-gradient(currentColor, currentColor);
+    background-size: 0% 1px;
+    background-position: 0 100%;
+    background-repeat: no-repeat;
+    transition: background-size 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+  .link-underline:hover {
+    background-size: 100% 1px;
+  }
+}
+
+@layer utilities {
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+  .no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+
+  .text-balance {
+    text-wrap: balance;
+  }
+
+  .text-pretty {
+    text-wrap: pretty;
+  }
+
+  /* Subtle woven texture used behind hero / story sections. */
+  .weave-texture {
+    background-image: radial-gradient(rgba(42, 33, 25, 0.05) 1px, transparent 1px),
+      radial-gradient(rgba(42, 33, 25, 0.05) 1px, transparent 1px);
+    background-position: 0 0, 8px 8px;
+    background-size: 16px 16px;
+  }
+
+  /* Fine paper grain — the "uncoated stock" layer of the aesthetic. */
+  .bg-grain {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='180' height='180' filter='url(%23n)' opacity='0.55'/%3E%3C/svg%3E");
+  }
+
+  /* Warm gradient headline text. */
+  .text-gradient-warm {
+    background-image: linear-gradient(100deg, #93421c 0%, #bc5b2c 38%, #c2892b 78%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+
+  .text-gradient-sage {
+    background-image: linear-gradient(100deg, #59654b 0%, #77856a 55%, #a5b294 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+
+  /* Fade the bottom edge of a decorative layer. */
+  .mask-fade-b {
+    -webkit-mask-image: linear-gradient(to bottom, black 55%, transparent 100%);
+    mask-image: linear-gradient(to bottom, black 55%, transparent 100%);
+  }
+
+  /* Thin editorial grid lines. */
+  .grid-lines {
+    background-image: linear-gradient(rgba(42, 33, 25, 0.05) 1px, transparent 1px);
+    background-size: 100% 44px;
+  }
+
+  .perspective-far {
+    perspective: 1400px;
+  }
+}
+
+/* Respect reduced-motion preferences */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}
